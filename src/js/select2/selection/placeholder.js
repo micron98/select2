@@ -18,10 +18,9 @@ define([
     return placeholder;
   };
 
-  Placeholder.prototype.createPlaceholder = function (decorated, placeholder) {
-    var $placeholder = this.selectionContainer();
+  Placeholder.prototype.createPlaceholder = function (decorated, placeholder, $placeholder) {
 
-    $placeholder.html(this.display(placeholder));
+    $placeholder.html(this.display(placeholder,$placeholder));
     $placeholder.addClass('select2-selection__placeholder')
                 .removeClass('select2-selection__choice');
 
@@ -39,10 +38,11 @@ define([
     }
 
     this.clear();
-
-    var $placeholder = this.createPlaceholder(this.placeholder);
-
+    
+    var $placeholder = this.selectionContainer();
     this.$selection.find('.select2-selection__rendered').append($placeholder);
+    var $placeholder = this.createPlaceholder(this.placeholder,$placeholder);
+
   };
 
   return Placeholder;
